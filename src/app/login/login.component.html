@@ -1,0 +1,44 @@
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<div class="card">
+
+  <img class="logo" src="assets/logo.png" />
+  <br/><br/><div style="text-align: center;"><strong>Crie sua conta</strong></div>
+  <form [formGroup]="loginForm" class="form" >
+
+    <div class="div-field">
+      <label class="label">Nome completo</label><br/>
+      <input class="form-field" formControlName="nome" placeholder="Nome completo" value="" />
+    </div>
+
+    <div class="div-field">
+      <label class="label">E-mail</label><br/>
+      <input class="form-field" formControlName="nome" placeholder="Nome completo" value="" />
+    </div>
+
+    <div class="div-field">
+      <label class="label">Senha</label><br/>
+      <input class="form-field" type="password" formControlName="senha" placeholder="Senha" value="" />
+
+      <div style="width: 80%;margin-left: 10%;">
+        <div *ngIf="validLength(this.loginForm.controls.senha.value)" class="bars"></div>
+        <div *ngIf="validUpperCaseLetter(this.loginForm.controls.senha.value)" class="bars"></div>
+        <div *ngIf="validNumericCharacter(this.loginForm.controls.senha.value)" class="bars"></div>
+      </div>
+      <div *ngIf="!validLength(this.loginForm.controls.senha.value)" ><br/><span class="password-validation"><span class="topic-sign">• </span>Pelo menos 1 número</span></div>
+      <div *ngIf="!validUpperCaseLetter(this.loginForm.controls.senha.value)" ><br/><span class="password-validation"><span class="topic-sign">• </span>Pelo menos 1 letra maiúscula</span></div>
+      <div *ngIf="!validNumericCharacter(this.loginForm.controls.senha.value)" ><br/><span class="password-validation"><span class="topic-sign">• </span>Pelo menos 6 caracteres</span></div>
+    </div>
+
+    <div class="div-field">
+      <label class="label">Confirmar senha</label><br/>
+      <input class="form-field" type="password" formControlName="confirmaSenha" placeholder="Confirmar senha" value="" />
+      <div *ngIf="!validConfirmPassword(this.loginForm.controls.senha.value)" ><br/><span class="confirm-password-validation">Senhas não conferem</span></div>
+    </div>
+
+    <button (click)="submit()" [disabled]="!validSubmit()"  class="submit-button" type="submit" [innerHtml]="submitButton"></button>
+  </form>
+
+</div>
