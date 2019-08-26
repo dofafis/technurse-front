@@ -2,7 +2,31 @@
     <meta charset="UTF-8">
 </head>
 
-<div class="card">
+<div *ngIf="!cadastro" class="card">
+
+  <img class="logo" src="assets/logo.png" />
+  <br/><br/><div style="text-align: center;"><strong>Login</strong></div>
+  <form [formGroup]="loginForm" class="form" >
+
+    <div class="div-field">
+      <label class="label">E-mail</label><br/>
+      <input class="form-field" formControlName="email" placeholder="E-mail" value="" />
+    </div>
+
+    <div class="div-field">
+      <label class="label">Senha</label><br/>
+      <input class="form-field" type="password" formControlName="senha" placeholder="Senha" value="" />
+    </div>
+
+    <a (click)="cadastrar()">Criar conta</a>
+
+    <button (click)="submit()" [disabled]="!validSubmit()"  class="submit-button" type="submit" innerHtml="Login"></button>
+  </form>
+
+</div>
+
+
+<div *ngIf="!cadastro" class="card">
 
   <img class="logo" src="assets/logo.png" />
   <br/><br/><div style="text-align: center;"><strong>Crie sua conta</strong></div>
@@ -15,7 +39,7 @@
 
     <div class="div-field">
       <label class="label">E-mail</label><br/>
-      <input class="form-field" formControlName="nome" placeholder="Nome completo" value="" />
+      <input class="form-field" formControlName="email" placeholder="E-mail" value="" />
     </div>
 
     <div class="div-field">

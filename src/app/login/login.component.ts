@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   loginForm;
   submitButton = "Cadastrar";
+  cadastro = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -76,6 +77,10 @@ export class LoginComponent implements OnInit {
           console.log(error)
         }
       );
+    }
+
+    cadastrar() {
+      this.cadastro = true;
     }
 
 }
