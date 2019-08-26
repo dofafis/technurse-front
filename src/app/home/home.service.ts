@@ -12,13 +12,12 @@ export class HomeService {
 
       const httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
         })
       };
 
       return this.http
-        .post<any>(API + '/api/auth/user', httpOptions);
+        .get<any>(API + '/api/user', httpOptions);
 
     }
 
