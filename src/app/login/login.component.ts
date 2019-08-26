@@ -1,6 +1,7 @@
 import { LoginService } from './login.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,15 @@ import { FormBuilder } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm;
+  loginForm1;
   submitButton = "Cadastrar";
   cadastro = false;
 
   constructor(
     private elementRef: ElementRef,
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
     ) { }
 
     ngOnInit() {
@@ -26,6 +29,11 @@ export class LoginComponent implements OnInit {
         email: '',
         senha: '',
         confirmaSenha: '',
+      });
+
+      this.loginForm1 = this.formBuilder.group({
+        email: '',
+        senha: '',
       });
 
     }
@@ -62,19 +70,40 @@ export class LoginComponent implements OnInit {
       && this.validConfirmPassword(this.loginForm.controls.senha.value);
     }
 
-    submit() {
+    cadastroSubmit() {
       console.log('asdaddadsdas');
       var loginInfo = {
         "email": this.loginForm.controls.email.value,
         "password": this.loginForm.controls.senha.value,
         "password_confirmation": this.loginForm.controls.confirmaSenha.value
       }
-      this.loginService.logarUsuario(loginInfo).subscribe(
+      this.loginService.cadastrarUsuario(loginInfo).subscribe(
         (response) => {
           console.log(response);
+          this.cadastro = false;
         },
         (error) => {
           console.log(error)
+        }
+      );
+    }
+
+    loginSubmit() {
+      console.log("Login");
+
+      var login = {
+        "email": this.loginForm1.controls.email.value,
+        "password": this.loginForm1.controls.senha.value
+      };
+
+      this.loginService.logarUsuario(login).subscribe(
+        (response) => {
+          console.log(response);
+          localStorage.setItem('token', response['token']);
+          this.router.navigate(['home', response]);
+        },
+        (error) => {
+          console.log(error);
         }
       );
     }

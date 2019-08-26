@@ -6,7 +6,7 @@
 
   <img class="logo" src="assets/logo.png" />
   <br/><br/><div style="text-align: center;"><strong>Login</strong></div>
-  <form [formGroup]="loginForm" class="form" >
+  <form [formGroup]="loginForm1" class="form" >
 
     <div class="div-field">
       <label class="label">E-mail</label><br/>
@@ -17,16 +17,15 @@
       <label class="label">Senha</label><br/>
       <input class="form-field" type="password" formControlName="senha" placeholder="Senha" value="" />
     </div>
+    <a (click)="cadastrar()" style="color: blue; font-size: 15px; margin-left: 10%;">Criar conta</a>
 
-    <a (click)="cadastrar()">Criar conta</a>
-
-    <button (click)="submit()" [disabled]="!validSubmit()"  class="submit-button" type="submit" innerHtml="Login"></button>
+    <button (click)="loginSubmit()" class="submit-button" type="submit">Login</button>
   </form>
 
 </div>
 
 
-<div *ngIf="!cadastro" class="card">
+<div *ngIf="cadastro" class="card">
 
   <img class="logo" src="assets/logo.png" />
   <br/><br/><div style="text-align: center;"><strong>Crie sua conta</strong></div>
@@ -62,7 +61,7 @@
       <div *ngIf="!validConfirmPassword(this.loginForm.controls.senha.value)" ><br/><span class="confirm-password-validation">Senhas não conferem</span></div>
     </div>
 
-    <button (click)="submit()" [disabled]="!validSubmit()"  class="submit-button" type="submit" [innerHtml]="submitButton"></button>
+    <button (click)="cadastroSubmit()" [disabled]="!validSubmit()"  class="submit-button" type="submit" [innerHtml]="submitButton"></button>
   </form>
 
 </div>
